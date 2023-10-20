@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>國光客運訂票記錄查</title>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+		integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"
+		integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
+	<script src="../static/js/viewOrder.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<!-- <link rel="stylesheet" href="//resources/demos/style.css"> -->
+	<link rel="stylesheet" href="../static/css/viewOrder.css">
+
+	<link rel="stylesheet" href="../static/css/base.css">
+
+</head>
+
+<body>
+
+	<div id="col_head">
+		<ul>
+			<li><a href="/index" class="active">首頁</a></li>
+			<li><a href="/viewSchedule">查詢班次&票價</a></li>
+			<li><a href="/orderGo">單程訂票</a></li>
+			<li><a href="/viewOrder">訂票紀錄查詢&取消訂票</a></li>
+
+			<li style="float:right"><a href="/logout">您好，這邊登出</a></li>
+
+		</ul>
+	</div>
+
+
+
+
+	<div id="col_content">
+		<div class="outstation">
+			<form id="search" method="POST" action="/viewOrder" onsubmit="return doOnsubmit()" style="display: inline;">
+				<input type="submit" value="查詢" class="buttons">
+			</form>
+		</div>
+
+		<div id="showWait">
+			&emsp;{{ data["msg"] }}
+		</div>
+
+		<div id="searchResult">
+			{% for order in data["result"] %}
+			<div class="order">
+				<div>
+					<table>
+						<tr>
+							<td>訂單編號</td>
+							<td>訂票日期</td>
+							<td>金額</td>
+							<td>單/去回程</td>
+							<td>付款方式</td>
+							<td>付款狀態</td>
+						</tr>
+						<tr>
+							<td style="width: 175px;">{{ order["訂單編號"] }}</td>
+							<td style="width: 175px;">{{ order["訂票日期"] }}</td>
+							<td>{{ order["金額"] }}</td>
+							<td>{{ order["單/去回程"] }}</td>
+							<td>{{ order["付款方式"] }}</td>
+							<td>{{ order["付款狀態"] }}</td>
+						</tr>
+					</table>
+				</div>
+				<div>
+					<form action="/orderCancel" method="post" onsubmit="return doOnsubmitCancel()">
+						<input type="text" name="cancel" value="cancel{{ loop.index }}" hidden>
+						<input type="submit" name="cancelBtn" class="cancelBtn" value="取消訂單">
+					</form>
+				</div>
+			</div>
+
+			<div class="result">
+				<table>
+					<tr>
+						<td>乘車日期</td>
+						<td>乘車時間</td>
+						<td>起迄站(經由站)</td>
+						<td>車種</td>
+						<td>座位號</td>
+					</tr>
+
+					{% for rideDay,rideTime,startFinalVia,carType,seatNum in
+					order["詳細訂單資訊"]["乘車日期"]|zip(order["詳細訂單資訊"]["乘車時間"],
+					order["詳細訂單資訊"]["起迄站(經由站)"],order["詳細訂單資訊"]["車種"],
+					order["詳細訂單資訊"]["座位號"])
+					%}
+					<tr>
+						<td style="width: 150px;">{{ rideDay }}</td>
+						<td>{{ rideTime }}</td>
+						<td style="width: 300px;">{{ startFinalVia }}</td>
+						<td>{{ carType }}</td>
+						<td>{{ seatNum }}</td>
+					</tr>
+					{% endfor %}
+
+				</table>
+			</div>
+			{% endfor %}
+		</div>
+
+
+		<!-- 原本傳進來是DataFrame用groupby轉成list處理 
+			<div id="searchResult">
+			{#{% for order in data["result"] %}
+			<div class="order">
+				{{ order[0][0] }} - {{ order[0][1] }} - {{ order[0][2] }} - {{ order[0][3] }} -
+				{{ order[0][4] }} - {{ order[0][5] }}
+			</div>
+
+			{% for rideDay,rideTime,startFinalVia,carType,seatNum in
+			order[1]["乘車日期"]|zip(order[1]["乘車時間"],order[1]["起迄站(經由站)"],
+			order[1]["車種"],order[1]["座位號"])
+			%}
+			<div class="result">
+				{{ rideDay }} - {{ rideTime }} - {{ startFinalVia }} - {{ carType }} - {{ seatNum }}
+			</div>
+			{% endfor %}
+			{% endfor %}#}
+		</div> -->
+
+
+		<!-- 原本傳進來是DataFrame處理 
+	<div id="searchResult">		
+	{#{% for orderNum,orderedDate,orderAmount,goOrGoback,payMethod,
+		payState,rideDay,rideTime,startFinalVia,carType,seatNum in
+		data["result"]["訂單編號"]|zip(data["result"]["訂票日期"],
+		data["result"]["金額"],data["result"]["單/去回程"],data["result"]["付款方式"],
+		data["result"]["付款狀態"],data["result"]["乘車日期"],data["result"]["乘車時間"],
+		data["result"]["起迄站(經由站)"],data["result"]["車種"],data["result"]["座位號"],)
+		%}
+		<div class="result2">
+			{{ orderNum }} - {{ orderedDate }} - {{ orderAmount }} - {{ goOrGoback }} - {{ payMethod }} - {{
+			payState }} -
+			{{ rideDay }} - {{ rideTime }} - {{ startFinalVia }} - {{ carType }} - {{ seatNum }}
+		</div>
+		{% endfor %}#}
+	</div>-->
+	</div>
+
+	<div id="col_side">
+		{{ data["iframe"]|safe }}
+	</div>
+
+</body>
+
+</html>

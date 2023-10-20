@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>國光客運單程訂票系統</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"
+        integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
+    <script src="../static/js/orderGo.js" type="text/javascript"></script>
+    <script src="../static/js/date.js" type="text/javascript"></script>
+    <script src="../static/js/time.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <!-- <link rel="stylesheet" href="//resources/demos/style.css"> -->
+    <link rel="stylesheet" href="../static/css/orderGoChoose.css">
+
+    <link rel="stylesheet" href="../static/css/base.css">
+
+</head>
+
+<body>
+
+    <div id="col_head">
+        <ul>
+            <li><a href="/index" class="active">首頁</a></li>
+            <li><a href="/viewSchedule">查詢班次&票價</a></li>
+            <li><a href="/orderGo">單程訂票</a></li>
+			<li><a href="/viewOrder">訂票紀錄查詢&取消訂票</a></li>
+
+            <li style="float:right"><a href="/logout">您好，這邊登出</a></li>
+
+        </ul>
+    </div>
+
+    <div id="col_content">
+        <form id="search" method="POST" action="/orderGo" onsubmit="return search()">
+            <div class="outstation">
+                <label>起站:</label>
+                <select name="startStation" id="startStation"
+                    onchange="changefield('startStation',finalStation,'/getSelect')" disabled>
+                    <option value="{{ data['chooseStart'] }}"> {{ data['chooseStart'] }} </option>
+                </select>
+
+                &emsp;&emsp;&emsp;&emsp;
+
+                <label> 迄站:</label>
+                <select name="finalStation" id="finalStation" disabled>
+                    <option value="{{ data['chooseFinal'] }}"> {{ data['chooseFinal'] }} </option>
+                </select>
+            </div>
+
+            <div class="outstation">
+                <!-- 日期區間:<input type="date" name="startDate" id="startDate">~
+										<input type="date" name="endDate" id="endDate">
+											<script src="..\static\js\date.js"></script> -->
+
+                <label for="from">乘車日期:</label>
+                <input type="text" id="startDate" name="startDate" pattern="[0-1]\d/[0-3]\d/[2-9]\d{3}"
+                    onchange="changeStartDate()" value="{{ data['chooseDate'] }}" disabled>
+                <!-- <label for="to">到:</label> -->
+                <input type="text" id="finalDate" name="finalDate" pattern="[0-1]\d/[0-3]\d/[2-9]\d{3}" hidden>
+                <label for="time">預計乘車時間:</label>
+                <select name="hours" id="hours" disabled>
+                    <option value="{{ data['chooseHour'] }}">{{ data['chooseHour'] }} </option>
+                </select>時
+                <select name="minutes" id="minutes" disabled>
+                    <option value="{{ data['chooseMin'] }}"> {{ data['chooseMin'] }} </option>
+                </select>分
+
+            </div>
+            <br />
+        </form><br />
+        &emsp;<form action="/orderGo" method="get">
+            <a href="/orderGo" style="text-decoration:none;">
+                &emsp;<input type="submit" value="回訂購頁面" class="buttons">
+            </a>
+        </form>
+        &emsp;本訂單請於1小時內完成付款，否則系統會取消訂單。<br />
+        &emsp;訂票結果:
+        <br /><br />
+        <div class="bought">
+            {{ data["rideDayYMDW"] }} {{ data["time"] }} <br>
+            {{ data["chooseStart"] }}&rarr;{{ data["chooseFinal"] }}&emsp;經由:{{ data["via"] }}<br>
+
+            <table>
+                <tr>
+                    <td>座位號</td>
+                    <td>票種</td>
+                </tr>
+                {% for seatNum,ticketType in
+                data["seatNum"]|zip(data["ticketType"])
+                %}
+                <tr style="text-align:center">
+                    <td>{{ seatNum }}</td>
+                    <td>{{ ticketType }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+
+            <br>總金額:{{ data["orderAmount"] }} 元
+        </div>
+
+    </div>
+    <div id="col_side">
+        {{ data["iframe"]|safe }}
+    </div>
+
+</body>
+
+</html>

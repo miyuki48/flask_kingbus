@@ -1,0 +1,257 @@
+#col_body {
+    display: grid;
+    grid-template-columns: 400px 400px 400px;
+    row-gap: 2rem;
+    column-gap: 2rem;
+    justify-content: center;
+}
+
+.pics1 {
+    height: 250px;
+    width: 400px;
+    animation: move1 10s ease-in-out infinite;
+}
+
+.pics2 {
+    height: 250px;
+    width: 400px;
+    animation: move2 10s ease-in-out infinite;
+}
+
+.pics3 {
+    height: 250px;
+    width: 400px;
+    animation: move3 10s ease-in-out infinite;
+}
+
+.pics4 {
+    height: 250px;
+    width: 400px;
+    animation: move4 10s ease-in-out infinite;
+}
+
+.pics5 {
+    height: 250px;
+    width: 400px;
+    animation: move5 10s ease-in-out infinite;
+}
+
+.pics6 {
+    height: 250px;
+    width: 400px;
+    animation: move6 10s ease-in-out infinite;
+}
+
+
+@keyframes move1 {
+
+    /**注意这几个图片大小一定要一样，否则会出现抖动现象*/
+    /*这里的0%50%100%是相对于执行时间的，最后一个图片先播放*/
+    0% {
+        background: url('../images/台北景點圖片/台北101.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    25% {
+        background: url('../images/台北景點圖片/台北紅樓.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    50% {
+        background: url('../images/台北景點圖片/台北貓纜.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    75% {
+        background: url('../images/台北景點圖片/國父紀念館.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    100% {
+        background: url('../images/台北景點圖片/松山文創.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+}
+
+@keyframes move2 {
+
+    /**注意这几个图片大小一定要一样，否则会出现抖动现象*/
+    /*这里的0%50%100%是相对于执行时间的，最后一个图片先播放*/
+    0% {
+        background: url('../images/新竹景點圖片/湖口老街.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    25% {
+        background: url('../images/新竹景點圖片/竹東河濱公園.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    50% {
+        background: url('../images/新竹景點圖片/西瓜莊園.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    75% {
+        background: url('../images/新竹景點圖片/金獅古道.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    100% {
+        background: url('../images/新竹景點圖片/飛鳳山步道.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+}
+
+
+@keyframes move3 {
+
+    /**注意这几个图片大小一定要一样，否则会出现抖动现象*/
+    /*这里的0%50%100%是相对于执行时间的，最后一个图片先播放*/
+    0% {
+        background: url('../images/台中景點圖片/台中公園.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    25% {
+        background: url('../images/台中景點圖片/大坑.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    50% {
+        background: url('../images/台中景點圖片/大甲文昌廟.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    75% {
+        background: url('../images/台中景點圖片/梨山.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    100% {
+        background: url('../images/台中景點圖片/自然科學博物館.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+}
+
+
+@keyframes move4 {
+
+    /**注意这几个图片大小一定要一样，否则会出现抖动现象*/
+    /*这里的0%50%100%是相对于执行时间的，最后一个图片先播放*/
+    0% {
+        background: url('../images/台南景點圖片/孔子廟.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    25% {
+        background: url('../images/台南景點圖片/安平古堡.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    50% {
+        background: url('../images/台南景點圖片/梅嶺.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    75% {
+        background: url('../images/台南景點圖片/赤崁樓.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    100% {
+        background: url('../images/台南景點圖片/關子嶺.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+}
+
+
+@keyframes move5 {
+
+    /**注意这几个图片大小一定要一样，否则会出现抖动现象*/
+    /*这里的0%50%100%是相对于执行时间的，最后一个图片先播放*/
+    0% {
+        background: url('../images/高雄景點圖片/蓮池潭.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    25% {
+        background: url('../images/高雄景點圖片/駁二特區.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    50% {
+        background: url('../images/高雄景點圖片/高雄市立美術館.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    75% {
+        background: url('../images/高雄景點圖片/高雄愛河.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    100% {
+        background: url('../images/高雄景點圖片/高雄澄清湖.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+}
+
+@keyframes move6 {
+
+    /**注意这几个图片大小一定要一样，否则会出现抖动现象*/
+    /*这里的0%50%100%是相对于执行时间的，最后一个图片先播放*/
+    0% {
+        background: url('../images/花東景點圖片/初鹿牧場.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    25% {
+        background: url('../images/花東景點圖片/大坡池.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    50% {
+        background: url('../images/花東景點圖片/瑞穗牧場.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    75% {
+        background: url('../images/花東景點圖片/鯉魚潭.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+
+    100% {
+        background: url('../images/花東景點圖片/鹿野高台.jpg') no-repeat;
+        background-size: 400px 250px;
+    }
+}
+
+div.col_content {
+    display: grid;
+    grid-template-columns: 400px 400px 400px;
+    justify-content: center;
+    grid-gap: 1rem;
+}
+
+
+div.trip img {
+    width: 400px;
+    height: 300px;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+div.trip a:link,
+div.trip a:visited,
+div.trip a:hover,
+div.trip a:active {
+    color: darkblue;
+}
+
+span.price {
+    text-align: right;
+    display: block;
+}

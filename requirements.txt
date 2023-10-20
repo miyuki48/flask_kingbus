@@ -1,0 +1,11 @@
+flask
+flask_mail
+pandas
+datetime
+folium
+jinja2
+werkzeug
+flask_login
+selenium
+bs4
+requests
